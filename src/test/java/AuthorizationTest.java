@@ -18,7 +18,7 @@ public class AuthorizationTest extends Data{
     private By passwordInput = By.cssSelector(".mdc-text-field--focused > .mdc-text-field__input");
     private By submitButton = By.className("mdc-button__label");
     private By post = By.cssSelector(".post:nth-child(2) > .svelte-127jg4t:nth-child(2)");
-    private By greetingMessage = By.linkText("Hello, Dum");
+    private By greetingMessage = By.linkText("Hello, Ivanovych");
     private By logOutButton = By.xpath("//div[@id='app']/main/nav/ul/li[3]/div/ul/li[3]/span[2]");
 
 
@@ -42,7 +42,7 @@ public class AuthorizationTest extends Data{
         Data getData = new Data();
 
         driver.get(getData.getLoginUrl);
-        Assertions.assertTrue(driver.getPageSource().contains("login"), "error");
+        Assertions.assertTrue(driver.getPageSource().contains("login"), "Ошибка авторизации");
 
         driver.findElement(loginField).click();
         driver.findElement(loginInput).sendKeys(getData.userName);
@@ -51,8 +51,8 @@ public class AuthorizationTest extends Data{
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 
         driver.findElement(post).click();
-        Assertions.assertTrue(driver.getPageSource().contains("what happened"), "Что-то пошло не так");
-        Assertions.assertTrue(driver.getPageSource().contains("Hello, Dum"), "Что-то пошло не так");
+        Assertions.assertTrue(driver.getPageSource().contains("О кодах ответов"), "Что-то пошло не так");
+        Assertions.assertTrue(driver.getPageSource().contains("Привет, Ivanovych"), "Ошибка приветствия");
         driver.findElement(greetingMessage).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         driver.findElement(logOutButton).click();
@@ -73,7 +73,8 @@ public class AuthorizationTest extends Data{
         driver.findElement(loginInput).sendKeys(getData.userName);
         driver.findElement(submitButton).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        Assertions.assertTrue(driver.getPageSource().contains("login"));
+        Assertions.assertTrue(driver.getPageSource().contains("login"), "Ошибка. Пользователь был авторизован");
+        Assertions.assertTrue(driver.getPageSource().contains("Поле не может быть пустым"), "Сообщение об ошибке отсутствует");
         driver.close();
         driver.quit();
     }
@@ -91,8 +92,9 @@ public class AuthorizationTest extends Data{
         driver.findElement(loginInput).sendKeys(getData.wrongUserName1);
         driver.findElement(passwordField).sendKeys(getData.password);
         driver.findElement(submitButton).click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-        Assertions.assertTrue(driver.getPageSource().contains("login"));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1000));
+        Assertions.assertTrue(driver.getPageSource().contains("login"), "Ошибка. Пользователь был авторизован");
+        Assertions.assertTrue(driver.getPageSource().contains("Неправильный логин. Может состоять только из латинских букв и цифр, без спецсимволов"), "Сообщение об ошибке отсутствует");
         driver.close();
         driver.quit();
     }
@@ -112,6 +114,7 @@ public class AuthorizationTest extends Data{
         driver.findElement(submitButton).click();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
         Assertions.assertTrue(driver.getPageSource().contains("login"));
+        Assertions.assertTrue(driver.getPageSource().contains("Неправильный логин. Может быть не менее 3 и не более 20 символов"), "Сообщение об ошибке отсутствует");
         driver.close();
         driver.quit();
     }

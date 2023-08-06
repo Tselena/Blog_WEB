@@ -1,12 +1,12 @@
 public class Data {
     String getLoginUrl = "https://test-stand.gb.ru/login";
-    String userName = "Dum";
-    String password = "2761a156a4";
+    String userName = "Ivanovych";
+    String password = "cd6659c5c6";
     String tooLongPassword = "2761uyfytdynklkjil98@T@^iuoi087620a156a4!";
-    String wrongUserName1 = "Dum@$";
+    String wrongUserName1 = " Ivan@$";
 
-    String userNameNoPost = "Bunny";
-    String passwordNoPost = "39c5e84d73";
+    String userNameNoPost = "Zhenechka";
+    String passwordNoPost = "17230bd9e9";
 
     String urlPage1 = "https://test-stand.gb.ru/?page=1";
     String urlPage2 = "https://test-stand.gb.ru/?page=2";
